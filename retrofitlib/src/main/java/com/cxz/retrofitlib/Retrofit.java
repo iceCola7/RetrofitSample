@@ -46,7 +46,7 @@ public final class Retrofit {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 // 收集请求接口方法的信息
                 ServiceMethod serviceMethod = loadServiceMethod(method);
-                return null;
+                return new OkHttpCall(serviceMethod, args);
             }
         });
     }
