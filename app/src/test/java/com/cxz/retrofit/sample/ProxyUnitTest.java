@@ -18,7 +18,7 @@ import retrofit2.http.Path;
  * @date 2019/9/18
  * @desc
  */
-public class ProxyTestUnit {
+public class ProxyUnitTest {
 
     interface WanApi {
         @GET("/article/list/{page}/json")

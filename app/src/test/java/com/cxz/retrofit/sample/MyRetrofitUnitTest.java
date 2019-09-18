@@ -1,33 +1,33 @@
 package com.cxz.retrofit.sample;
 
+import com.cxz.retrofitlib.Retrofit;
+import com.cxz.retrofitlib.http.GET;
+import com.cxz.retrofitlib.http.Query;
+
 import org.junit.Test;
 
 import java.io.IOException;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * @author chenxz
  * @date 2019/9/18
- * @desc 单元测试
+ * @desc
  */
-public class RetrofitTextUnit {
+public class MyRetrofitUnitTest {
 
     public final static String BASE_URL = "https://wanandroid.com";
 
     interface WanApi {
-        @GET("/article/list/{page}/json")
-        Call<ResponseBody> getArticleList(@Path("page") int page);
+        @GET("/wxarticle/list/408/1/json")
+        Call get(@Query("k") String k);
     }
 
+
     @Test
-    public void testRetrofit() throws IOException {
+    public void testMyRetrofit() throws IOException {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -37,8 +37,8 @@ public class RetrofitTextUnit {
 
         // Retrofit GET 同步请求
         {
-            Call<ResponseBody> call = wanApi.getArticleList(0);
-            retrofit2.Response<ResponseBody> response = call.execute();
+            Call call = wanApi.get("android");
+            Response response = call.execute();
             if (response != null && response.body() != null) {
                 System.out.println("Retrofit GET 同步请求====>>" + response.body().string());
             }
